@@ -1,0 +1,176 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <button ion-button end  menuToggle="right">
+      <ion-icon name="information-circle"></ion-icon>
+    </button>
+    <ion-title>Capturar</ion-title>
+</ion-navbar>
+  </ion-header>
+  <ion-content padding>
+  	 <ion-card>
+     <ion-item href="#">
+    <ion-avatar item-start>
+       <ion-icon color="primary"  name="copy"></ion-icon>
+    </ion-avatar>
+    <h2>Registrar Reserva de Capitanes</h2>
+    <p>Solo una vez por dia</p>
+  
+  </ion-item>
+     
+    <ion-card-content>
+    <ion-col>
+  <ion-item>
+    
+    <ion-textarea [(ngModel)]="textarea" placeholder="Pegar aqui"  ></ion-textarea >
+  </ion-item>
+</ion-col>
+    </ion-card-content>
+  <ion-row no-padding>
+  <ion-col text-left>
+    <button ion-button clear small color="secondary" icon-start (click)="presentPrompt('1')">
+      <ion-icon name='create'></ion-icon>
+     generar
+    </button>
+     <button ion-button clear small color="secondary" icon-start (click)="pegar_c()">
+      <ion-icon name='create'></ion-icon>
+     pegar
+    </button>
+  </ion-col>
+</ion-row>
+</ion-card>
+<ion-card>
+     <ion-item href="#">
+    <ion-avatar item-start>
+       <ion-icon color="primary"  name="copy"></ion-icon>
+    </ion-avatar>
+    <h2>Registrar Reserva Automática</h2>
+    <h3>Pueden ser varios al dia </h3>
+    <p>Mesas sin reserva : {{disponibles}}</p>
+
+  
+  </ion-item>
+     
+    <ion-card-content>
+    <ion-col>
+  <ion-item>
+    
+    <ion-textarea    [(ngModel)]="textarea2" placeholder="Pegar aqui"  ></ion-textarea >
+  </ion-item>
+</ion-col>
+    </ion-card-content>
+  <ion-row no-padding>
+  <ion-col text-left>
+    <button ion-button clear small color="secondary" icon-start (click)="presentPrompt('2')">
+      <ion-icon name='create'></ion-icon>
+     generar
+    </button>
+     <button ion-button clear small color="secondary" icon-start (click)="pegar_c2()">
+      <ion-icon name='create'></ion-icon>
+     pegar
+    </button>
+  </ion-col>
+</ion-row>
+</ion-card>
+<ion-card>
+  <ion-item href="#">
+    <ion-avatar item-start>
+       <ion-icon color="primary"  name="copy"></ion-icon>
+    </ion-avatar>
+    <h2>Registrar RP</h2>
+     <h3>Sin asignación de mesa</h3>
+  
+  </ion-item>
+  
+    
+     
+    <ion-card-content>
+    <ion-col>
+  <ion-item>
+    
+    <ion-textarea    [(ngModel)]="textarea_rp" placeholder="Pegar aqui"  ></ion-textarea >
+  </ion-item>
+</ion-col>
+    </ion-card-content>
+  <ion-row no-padding>
+  <ion-col text-left>
+    <button ion-button clear small color="secondary" icon-start (click)="rp_pegar()">
+      <ion-icon name='create'></ion-icon>
+     generar
+    </button>
+    <button ion-button clear small color="secondary" icon-start (click)="pegar_r()">
+      <ion-icon name='create'></ion-icon>
+     pegar
+    </button>
+  </ion-col>
+</ion-row>
+</ion-card>
+<ion-card>
+
+  <ion-item>
+    <ion-avatar item-start>
+    <button ion-fab mini>
+      <ion-icon name="add"></ion-icon>
+    </button>
+    </ion-avatar>
+    <h2>Agregar Nuevo Registro</h2>
+    <p>Llenar todos los campos</p>
+  </ion-item>
+  <ion-card-content>
+ <ion-card-content>
+      <ion-row>
+    <ion-list >
+<ion-col>
+   <ion-item>
+    <ion-label floating >Numero de Mesa</ion-label>
+    
+    <ion-select [(ngModel)]="numero" name="numero" >
+      <ion-option *ngFor="let nombre of numero_mesa" [value]="nombre"   >
+      {{ nombre.numero }}
+      </ion-option>
+    </ion-select>
+  </ion-item>
+</ion-col>
+<ion-col>
+    <ion-item>
+    <ion-label floating >Nombre </ion-label>
+    <ion-input  [(ngModel)]="nombre" type="text" ></ion-input>
+  </ion-item>
+</ion-col>
+<ion-col>
+<ion-col>
+ <ion-item>
+    <ion-label floating  >Tipo de Reservación </ion-label>
+    <ion-select [(ngModel)]="tipo_res" interface="popover"  >
+      <ion-option value="rp">RP</ion-option>
+      <ion-option value="capitan">Capitan</ion-option>
+       <ion-option value="libre">Libre</ion-option>
+     </ion-select>
+  </ion-item>
+</ion-col>
+
+    <ion-item>
+    <ion-label floating  >Descripcion </ion-label>
+    <ion-input  [(ngModel)]="desc" type="text" ></ion-input>
+  </ion-item>
+</ion-col>
+
+</ion-list>
+</ion-row>
+  
+  </ion-card-content>
+    <ion-row no-padding>
+  <ion-col text-left>
+    <button ion-button clear small color="secondary" icon-start (click)="agregar()">
+      <ion-icon name='add'></ion-icon>
+     Agregar
+    </button>
+  </ion-col>
+</ion-row>
+</ion-card-content>
+</ion-card>
+  </ion-content>
+   
+  

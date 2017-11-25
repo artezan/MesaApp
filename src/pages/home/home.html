@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon> 
+    </button>
+    <button ion-button end  menuToggle="right">
+      <ion-icon name="information-circle"></ion-icon>
+    </button>
+        <ion-buttons end>
+    <button ion-button   icon-only (click)="presentPrompt()">
+      <ion-icon name="refresh"></ion-icon>
+    </button>
+  </ion-buttons>
+   
+    <ion-title>Mesas</ion-title>
+  </ion-navbar>
+  <ion-toolbar  no-border-top color="primary">
+    <ion-searchbar placeholder="Buscar Nombre o Número"  (ionInput)="getItems($event)"></ion-searchbar>
+      <ion-segment [(ngModel)]="estado" color="light">
+    <ion-segment-button value="reservaciones" >
+      Reservaciones
+    </ion-segment-button>
+    <ion-segment-button value="libre">
+     Sin Reservacion
+    </ion-segment-button>
+  </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  
+
+  <div [ngSwitch]="estado">
+<div *ngSwitchCase="'reservaciones'">
+<ion-grid>  
+  <ion-chip color="primary">
+    <ion-label>
+   Capitanes
+    </ion-label>  
+  </ion-chip>
+</ion-grid>
+ <ion-list  > 
+   <ion-item-sliding *ngFor="let item of provider.mesas_store"    >
+ 
+   <ion-item *ngIf="item.tipo_res=='capitan'">
+      <button ion-button  clear icon-only item-start   (click)="select(item.numero,item)"><ion-icon [name]="item.estado" color="primary" ></ion-icon></button>
+       
+      <b>{{item.nombre}}</b>
+      <p *ngIf="item.desc!='algo'">{{item.desc}}</p>
+      <p>Nivel:{{item.nivel}}</p>
+      <ion-note  item-end>#{{item.numero}} </ion-note>   
+   </ion-item>
+   <ion-item-options side="right">
+      <button ion-button (click)="editar(item)"><ion-icon name="create"></ion-icon>Editar</button>
+      <button ion-button color="danger" (click)="borrar(item.numero)"><ion-icon name="remove-circle"></ion-icon>Borrar</button>
+    </ion-item-options>
+    <ion-item-options side="left">
+      <button ion-button (click)="dar_mesa(item)" color="secondary"><ion-icon name="repeat"></ion-icon>Mesa</button>
+    </ion-item-options>
+</ion-item-sliding>
+  </ion-list>
+<ion-grid>
+    <ion-chip color="primary">
+    <ion-label>
+   R.P.
+    </ion-label>  
+  </ion-chip>
+</ion-grid>
+ <ion-list  >
+  <ion-item-sliding *ngFor="let item of provider.mesas_store"    >
+ 
+   <ion-item *ngIf="item.tipo_res=='rp'">
+      <button ion-button  clear icon-only item-start   (click)="select(item.numero,item)"><ion-icon [name]="item.estado" color="primary" ></ion-icon></button>
+      <p>{{item.nombre}}</p>
+      <p>{{item.desc}}</p>
+      <p>Nivel:{{item.nivel}}</p>
+      <ion-note  item-end>#{{item.numero}} {{item.nombre_res}}</ion-note>   
+   </ion-item>
+   <ion-item-options side="right">
+      <button ion-button (click)="editar(item)"><ion-icon name="create"></ion-icon>Editar</button>
+      <button ion-button color="danger" (click)="borrar(item.numero)"><ion-icon name="remove-circle"></ion-icon>Borrar</button>
+    </ion-item-options>
+       <ion-item-options side="left">
+      <button ion-button (click)="dar_mesa(item)" color="secondary"><ion-icon name="apps"></ion-icon>Mesa</button>
+    </ion-item-options>
+
+</ion-item-sliding>
+  </ion-list>
+ 
+</div>
+
+<div *ngSwitchCase="'libre'">
+<ion-grid>
+    <ion-chip color="primary">
+    <ion-label>
+   Libre
+    </ion-label>  
+  </ion-chip>
+</ion-grid>
+
+
+ <ion-list  >
+  <ion-item-sliding *ngFor="let item of provider.mesas_store"    >
+ 
+   <ion-item *ngIf="item.tipo_res=='libre' && item.numero<=55 ">
+      <button ion-button  clear icon-only item-start   (click)="select(item.numero,item)"><ion-icon [name]="item.estado" color="primary" ></ion-icon></button>
+      <h2># Mesa: {{item.numero}}</h2>
+      <h3>Nivel: {{item.nivel}}</h3>
+        <p>{{item.desc}}</p>
+   </ion-item>
+   <ion-item-options side="right">
+      <button ion-button (click)="editar(item)"><ion-icon name="create"></ion-icon>Editar</button>
+    </ion-item-options>
+</ion-item-sliding>
+  </ion-list>
+</div>
+</div>
+<ion-fab bottom right  >
+  <button ion-fab mini ><b>S</b></button>
+  <ion-fab-list side="top">
+     <button ion-fab (click)="planopage()" color="secondary" ><ion-icon name="locate" ></ion-icon></button>
+  </ion-fab-list>
+  <ion-fab-list side="left">
+     <button ion-fab (click)="capturarpage()" color="secondary" ><ion-icon name="add"   ></ion-icon></button>
+  </ion-fab-list>
+</ion-fab>
+
+</ion-content>
